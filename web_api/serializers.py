@@ -9,7 +9,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["name", "description", "image", "price", "rating_count", "rating_average"]
+        fields = ["id", "name", "description", "image", "price", "rating_count", "rating_average"]
     
     def get_rating_count(self, obj):
          return Rating.objects.filter(product__id=obj.id).count()
