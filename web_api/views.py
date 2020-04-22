@@ -4,6 +4,7 @@ from . import models
 from rest_framework.response import Response
 
 class ProductViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get']
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
 
