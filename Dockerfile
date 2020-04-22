@@ -1,5 +1,8 @@
 FROM python:3.8.0-alpine
 
+
+MAINTAINER Tobias Moeller
+
 # set work directory
 WORKDIR /app
 

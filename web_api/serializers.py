@@ -3,13 +3,13 @@ from .models import Product, Rating
 from django.db.models import Count
 from django.db.models import Avg
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     rating_count = serializers.SerializerMethodField()
     rating_average = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = ["name", "description", "image", "price", "rating_count", "rating_average"]
     
     def get_rating_count(self, obj):
          return Rating.objects.filter(product__id=obj.id).count()
@@ -18,7 +18,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         return Rating.objects.filter(product__id=obj.id).aggregate(Avg('rating'))["rating__avg"]
 
 
-class RatingSerializer(serializers.HyperlinkedModelSerializer):
+class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ['product', 'rating']
